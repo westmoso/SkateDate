@@ -1,3 +1,3 @@
 {
-    "mongoURI":"mongodb+srv://sophia:jXN6B3hCQ8oxSTNl@skatedate.0pnyv.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    "mongoURI":""
 }
