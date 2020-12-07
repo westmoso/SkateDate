@@ -1,4 +1,4 @@
-// const { connect } = require('mongoose');
+const { connect } = require('mongoose');
 const connectDB = require('./startup/db');
 const express = require('express');
 const app = express();
