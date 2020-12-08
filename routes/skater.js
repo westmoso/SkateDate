@@ -31,8 +31,8 @@ router.post('/', async (req,res) => {
 
     router.get('/', async (req,res) => {
         try { 
-            const products = await Product.find();
-            return res.send(products);
+            const Skater = await Skater.find();
+            return res.send(Skater);
         } catch (ex) {
             return res.status(500).send(`Internal Server Error: ${ex}`);
         } 
