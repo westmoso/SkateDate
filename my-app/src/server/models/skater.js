@@ -36,7 +36,11 @@ const skaterSchema = new mongoose.Schema({
     }
 });
 
-function validateSkater (product){ 
+
+
+const Skater = mongoose.model("Skater", skaterSchema);
+
+function validateSkater (Skater){ 
     const schema = Joi.object({
     
     firstname: Joi.string().min(2).max(50).required(),
@@ -51,9 +55,5 @@ function validateSkater (product){
     }
     
 
-    exports.Skater = Skater;
-    exports.validate = validateSkater;
-    exports.SkaterSchema = SkaterSchema;   
-
-const Skater = mongoose.model("Skater", skaterSchema);
-module.exports.Skater = Skater;
+    module.exports.validateSkater = validateSkater;
+    module.exports.Skater = Skater;   

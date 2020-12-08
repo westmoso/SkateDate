@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const connectDB = require('./startup/db');
 const express = require('express');
 const app = express();
-const skater = require('../routes/skater');
+const skater = require('./server/routes/skater');
 
 
 connectDB();
