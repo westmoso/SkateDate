@@ -1,14 +1,17 @@
-const { Skater } = require('../models/skater');
+const checkAuth = require("../middleware/auth");
+const { Skater, validateSkater} = require('../models/skater');
 const express = require('express');
 const router = express.Router();
 
 //Allendpointsandroutehandlersgohere
 
+router.use(checkAuth);
+
 router.post('/', async (req,res) => {
     try {
-        // const{error}=validate(req.body);
-        // if(error)
-        // return res.status(400).send(error);
+        const{error}=validateSkater(req.body);
+        if(error)
+        return res.status(400).send(error);
 
     
     const Skater = new Skater({
