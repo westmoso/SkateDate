@@ -1,12 +1,7 @@
 const mongoose = require('mongoose');
-// const connectDB = require('./startup/db');
 const express = require('express');
 const app = express();
-const skater = require('./server/routes/skater');
 const config = require('config');
-
-
-// connectDB();
 
 try {
 	mongoose
@@ -25,7 +20,7 @@ const SkaterRoute = require('./server/routes/skater');
 
 
 app.use(express.json());
-app.use('/api/skater', skater);
+app.use('/api/skater');
 
 app.use("/api/skater", SkaterRoute)
 
