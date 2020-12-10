@@ -10,12 +10,14 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
+    "flatpickr": "^4.6.6",
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.5",
     "path": "^0.12.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-google-maps": "^9.4.5",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
@@ -23,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "echo This is the DEV script"
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.2.0"
   }
 }

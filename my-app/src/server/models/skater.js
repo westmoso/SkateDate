@@ -35,7 +35,7 @@ const skaterSchema = new mongoose.Schema({
     skateType: {
         type: String
     },
-    dateStatus: {
+    skateStatus: {
         type: Boolean
     }
 });
@@ -55,14 +55,13 @@ const Skater = mongoose.model("Skater", skaterSchema);
 
 function validateSkater(Skater) {
     const schema = Joi.object({
-
         firstname: Joi.string().min(2).max(50).required(),
         username: Joi.string().min(2).max(50).required(),
         age: Joi.number().required(),
         avatar: Joi.string().min(2).max(50).required(),
         zipcode: Joi.string().min(5).max(5).required(),
         skateType: Joi.string().min(2).max(50).required(),
-        dateStatus: Joi.boolean(),
+        skateStatus: Joi.boolean(),
     });
     return schema.validate(Skater);
 }
