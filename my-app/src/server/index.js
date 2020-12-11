@@ -16,8 +16,8 @@ try {
 }
 
 //ROUTES
-const SkaterRoute = require('./server/routes/skater');
-const ReviewRoute = require('./server/routes/review');
+const SkaterRoute = require('./routes/skater');
+const ReviewRoute = require('./routes/review');
 
 
 
@@ -27,15 +27,15 @@ app.use('/api/skater');
 app.use("/api/skater", SkaterRoute)
 app.use("/api/review", ReviewRoute)
 
-const port = process.env.PORT||5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
-    console.log(`Server started on port:${port}`)
+	console.log(`Server started on port:${port}`)
 });
 
-// app.all("*", (req, res) => {
-// 	res.status(404).send(`Cannot find ${req.method} method for route ${req.path}`);
-// });
+app.all("*", (req, res) => {
+	res.status(404).send(`Cannot find ${req.method} method for route ${req.path}`);
+});
 
-// app.listen(process.env.PORT || 5000, () =>
-// 	console.log(`Listening on port http://localhost:${process.env.PORT || 5000}/`)
-// );
+app.listen(process.env.PORT || 5000, () =>
+	console.log(`Listening on port http://localhost:${process.env.PORT || 5000}/`)
+);
