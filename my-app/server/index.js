@@ -1,9 +1,10 @@
 const express = require('express');
-const app = express();
-const config = require('config');
 const cors = require('cors')
+const config = require('config');
 const mongoose = require('mongoose');
 
+
+const app = express();
 
 try {
     mongoose
@@ -18,6 +19,7 @@ try {
 }
 
 //ROUTES
+const AuthRoute = require("./routes/auth");
 const SkaterRoute = require('./routes/skater');
 const ReviewRoute = require('./routes/review');
 
