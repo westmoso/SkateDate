@@ -1,12 +1,13 @@
 import React from "react";
 import './App.css';
-import Header from "./Components/Header"
+import Header from "./Components/Header";
+import SkaterCard from "./Components/SkaterCard";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      {/* Cards */}
+      <SkaterCard />
       {/* Buttons */}
     </div>
   );
