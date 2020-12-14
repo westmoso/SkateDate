@@ -24,6 +24,7 @@ const AuthRoute = require("./routes/auth"); //come back
 const SkaterRoute = require('./routes/skater');
 const ReviewRoute = require('./routes/review');
 const SpotRoute = require('./routes/spot');
+const { SdCardSharp } = require('@material-ui/icons');
 
 
 
@@ -35,6 +36,31 @@ app.use("/api/skater", SkaterRoute)
 app.use("/api/review", ReviewRoute)
 app.use("/api/spot", SpotRoute)
 
+app.post("/skater/card", (req, res) => {
+    const skaterCard = req.body;
+
+    Cards.create(skaterCard, (err, data) => {
+        if (err) {
+            res.status(500).send(err)
+        }
+        else {
+            res.status(201).send(data)
+        }
+    })
+});
+
+app.get("/skater/card", (req, res) => {
+    const skaterCard = req.body;
+
+    Cards.find(skaterCard, (err, data) => {
+        if (err) {
+            res.status(500).send(err)
+        }
+        else {
+            res.status(201).send(data)
+        }
+    })
+});
 
 const port = process.env.PORT || 5000;
 

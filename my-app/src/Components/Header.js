@@ -17,7 +17,6 @@ function Header() {
             <IconButton>
                 <MapIcon fontSize="large" className="header__icon" />
             </IconButton>
-
             <IconButton>
                 <ForumIcon fontSize="large" className="header__icon" />
             </IconButton>

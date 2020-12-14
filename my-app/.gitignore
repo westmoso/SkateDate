@@ -6,7 +6,7 @@
 .pnp.js
 /server/config
 /server/node_modules
-../SkateDate/node_modules
+.env
 
 # testing
 /coverage

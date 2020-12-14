@@ -1,15 +1,22 @@
 import React from "react";
 import './App.css';
-import Header from "./Components/Header";
-import SkaterCard from "./Components/SkaterCard";
+import Sidebar from "./Components/Sidebar"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <SkaterCard />
-      {/* Buttons */}
-    </div>
+    <>
+      <div className="App">
+        <Router>
+          <Sidebar />
+          <Switch>
+            <Route path='/' />
+          </Switch>
+        </Router>
+      </div>
+    </>
   );
 }
 
