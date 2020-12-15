@@ -2,6 +2,7 @@ import React from "react";
 import './App.css';
 import Sidebar from "./Components/Sidebar"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import SkaterCard from "./Components/SkaterCard";
 
 
 
@@ -12,7 +13,9 @@ function App() {
         <Router>
           <Sidebar />
           <Switch>
-            <Route path='/' />
+            <Route path='/'>
+              <SkaterCard />
+            </Route>
           </Switch>
         </Router>
       </div>
