@@ -11,9 +11,9 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Map',
-        path: '/Map',
-        icon: <IoIcons.IoIosMap />,
+        title: 'Messages',
+        path: '/messages',
+        icon: <IoIcons.IoMdPeople />,
         cName: 'nav-text'
     },
     {
@@ -29,9 +29,9 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Messages',
-        path: '/messages',
-        icon: <FaIcons.FaEnvelopeOpenText />,
+        title: 'Search',
+        path: '/search',
+        icon: <IoIcons.IoIosMap />,
         cName: 'nav-text'
     },
     {

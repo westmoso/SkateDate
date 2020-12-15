@@ -1,5 +1,5 @@
-import { React } from 'react'
-import "./SkaterCard.css"
+// import { React } from 'react'
+// import "./SkaterCard.css"
 
 // function SkaterCard() {
 //     const [skater, setSkater] = useState([
@@ -54,10 +54,71 @@ import "./SkaterCard.css"
 
 // export default SkaterCard;
 
-export default function SkaterCard() {
+// export default function SkaterCard() {
+//     return (
+//         <div>
+//             <h1>skater card</h1>
+//         </div>
+//     )
+// }
+
+
+// import { boolean, string } from "joi";
+
+// const mongoose = require("mongoose");
+
+// const cardSchema = new mongoose.Schema({
+//     firstName: string,
+//     age: string,
+//     skateStatus: boolean,
+//     imgUrl: string
+// })
+
+// export default mongoose.model('cards', cardSchema)
+
+
+// import { People } from '@material-ui/icons';
+import React, { useState } from 'react';
+import TinderCard from "react-tinder-card";
+
+function skaterCard() {
+    const [skater, setSkater] = useState([
+        {
+            name: "george daniel",
+            url: "https://cdn.pixabay.com/photo/2016/09/17/07/03/instagram-1675670_960_720.png"
+        },
+        {
+            name: "matty healy",
+            url: "https://cdn.pixabay.com/photo/2016/09/17/07/03/instagram-1675670_960_720.png"
+        },
+        {
+            name: "ross macdonald ",
+            url: "https://cdn.pixabay.com/photo/2016/09/17/07/03/instagram-1675670_960_720.png"
+        }
+    ])
     return (
         <div>
-            <h1>skater card</h1>
+            <h1>Skater cards</h1>
+            <div className="SkaterCard__cardcontainer"></div>
+            {skater.map(skater => (
+                <TinderCard
+                    className="swipe"
+                    key={skater.name}
+                    preventSwipe={['up', 'down']}>
+                    <div style={{
+                        backgroundImage: `url(${skater.url})`
+                    }} className="card">
+                        <h3>
+                            {skater.name}
+                        </h3>
+                    </div>
+                </TinderCard>
+
+
+
+            ))}
         </div>
     )
 }
+
+export default skaterCard

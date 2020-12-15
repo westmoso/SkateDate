@@ -14,6 +14,13 @@ const skaterSchema = new mongoose.Schema({
         minlength: 5,
         maxlength: 50
     },
+    email: {
+        type: String,
+        unique: true,
+        required: true,
+        minlength: 5,
+        maxlength: 255
+    },
     password: {
         type: String,
         required: true,
@@ -32,12 +39,24 @@ const skaterSchema = new mongoose.Schema({
         maxlength: 5,
         required: true,
     },
-    skateType: {
+    preferences: {
         type: String
     },
-    skateStatus: {
+    skatetus: {
         type: Boolean
-    }
+    },
+    wishlist: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Wishlist"
+        }
+    ],
+    reviews: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Review"
+        }
+    ]
 });
 
 skaterSchema.methods.generateAuthToken = function () {
