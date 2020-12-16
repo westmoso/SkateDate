@@ -7,7 +7,6 @@
 /server/config
 /server/node_modules
 .env
-.firebase.js
 
 # testing
 /coverage

@@ -19,34 +19,36 @@ function SkaterCard() {
     ]);
 
     useEffect(() => {
-        database
+        const unsubscribe = database
             .collection(`skater`)
             .onSnapshot(snapshot => {
                 setSkater(snapshot.docs.map(doc => doc.data()))
-            })
+            });
+
+        return () => {
+            unsubscribe();
+        };
     }, [])
 
     return (
         <div>
             <h1>Skater cards</h1>
-            <div className="SkaterCard__cardcontainer"></div>
-            {skater.map(skater => (
-                <TinderCard
-                    className="swipe"
-                    key={skater.name}
-                    preventSwipe={['up', 'down']}>
-                    <div style={{
-                        backgroundImage: `url(${skater.url})`
-                    }} className="card">
-                        <h3>
-                            {skater.name}
-                        </h3>
-                    </div>
-                </TinderCard>
+            <div className="SkaterCard__cardcontainer">
+                {skater.map(skater => (
+                    <TinderCard className="swipe"
+                        key={skater.name}
+                        preventSwipe={['up', 'down']}>
+                        <div style={{
+                            backgroundImage: `url(${skater.url})`
+                        }} className="card">
+                            <h3>
+                                {skater.name}
+                            </h3>
+                        </div>
+                    </TinderCard>
+                ))}
 
-
-
-            ))}
+            </div>
         </div>
     )
 }
