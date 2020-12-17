@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Joi = require('joi');
 const config = require("config");
 const jwt = require("jsonwebtoken");
-
+const path = require("path");
 
 const skaterSchema = new mongoose.Schema({
-    firstName: {
+    firstname: {
         type: String
     },
     username: {
@@ -30,6 +30,18 @@ const skaterSchema = new mongoose.Schema({
     avatar: {
         type: String
     },
+    birthday: {
+        type: String,
+        get: a => {
+            let date = new Date(a);
+            let today = new Date();
+            let timeDiff = today.getTime() - date.getTime();
+            let age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365);
+            return age;
+        },
+        set: age => age,
+        alias: 'age',
+    },
     age: {
         type: Number
     },
@@ -42,7 +54,7 @@ const skaterSchema = new mongoose.Schema({
     preferences: {
         type: String
     },
-    skatetus: {
+    looking: {
         type: Boolean
     },
     wishlist: [
@@ -74,13 +86,9 @@ const Skater = mongoose.model("Skater", skaterSchema);
 
 function validateSkater(Skater) {
     const schema = Joi.object({
-        firstname: Joi.string().min(2).max(50).required(),
-        username: Joi.string().min(2).max(50).required(),
-        age: Joi.number().required(),
-        avatar: Joi.string().min(2).max(50).required(),
-        zipcode: Joi.string().min(5).max(5).required(),
-        skateType: Joi.string().min(2).max(50).required(),
-        skateStatus: Joi.boolean(),
+        username: Joi.string().min(5).max(50).required(),
+        email: Joi.string().min(5).max(255).required().email(),
+        password: Joi.string().min(5).max(1024).required(path)
     });
     return schema.validate(Skater);
 }

@@ -26,6 +26,7 @@
     "install": "^0.13.0",
     "mapbox-gl": "^2.0.0",
     "node-geocoder": "^3.27.0",
+    "path": "^0.12.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",

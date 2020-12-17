@@ -24,7 +24,7 @@ const AuthRoute = require("./routes/auth"); //come back
 const SkaterRoute = require('./routes/skater');
 const ReviewRoute = require('./routes/review');
 const SpotRoute = require('./routes/spot');
-const { SdCardSharp } = require('@material-ui/icons');
+
 
 
 

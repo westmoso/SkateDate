@@ -1,55 +1,52 @@
+const express = require("express");
 const checkAuth = require("../middleware/auth");
-const { Skater, validateSkater} = require('../models/skater');
-const express = require('express');
+const { Skater } = require("../models/skater");
 const router = express.Router();
+const path = require("path");
 
-//Allendpointsandroutehandlersgohere
+const uploadPath = path.join("uploads", "avatars");
 
 router.use(checkAuth);
 
-router.post('/', async (req,res) => {
+router.patch("/avatar", async (req, res) => {
     try {
-        const{error}=validateSkater(req.body);
-        if(error)
-        return res.status(400).send(error);
+        const file = req.files.file;
 
-    
-    // const Skater = new Skater({
-    //     firstname: req.body.firstname,
-    //     username: req.body.username,
-    //     age: req.body.age,
-    //     avatar: req.body.avatar,
-    //     zipcode: req.body.zipcode,
-    //     skateType: req.body.skatetype,
-    //     dateStatus: req.body.datestatus,
-    // });
-    
-    await Skater.save();
-    
-    return res.send(Skater);
-    } catch(ex) {
-    return res.status(500).send(`Internal Server Error: ${ex}`);
-    }
-    });
+        if (!file || file == null) return res.status(400).json({ error: "No avatar provided." });
 
-    // router.get('/', async (req,res) => {
-    //     try { 
-    //         const Skater = await Skater.find();
-    //         return res.send(Skater);
-    //     } catch (ex) {
-    //         return res.status(500).send(`Internal Server Error: ${ex}`);
-    //     } 
-    // });
+        file.mv(path.join(uploadPath, file.name));
 
-    router.delete("/", async (req, res) => {
+        const details = {
+            fileName: file.name,
+            filePath: path.join(uploadPath, file.name)
+        };
+
+        const skater = await Skater.findById(req.skater._id);
+
+        skater.avatar = details.filePath;
+
         try {
-            await Skater.findByIdAndDelete(req.user._id);
-    
-            res.status(200).json({ message: "Deleted" });
+            await skater.save();
+            res.status(200).json(details);
         } catch (err) {
-            res.status(500).json({ error: "Could not delete" });
+            fs.unlink(path.join(uploadPath, file.name), err => {
+                if (err) console.error(err);
+            });
+            res.status(500).json({ error: "Saving failed." });
         }
-    });
+    } catch (err) {
+        res.status(404).json({ error: "Could not find skater." });
+    }
+});
 
+router.delete("/", async (req, res) => {
+    try {
+        await Skater.findByIdAndDelete(req.skater._id);
 
-module.exports=router;
+        res.status(200).json({ message: "Deleted" });
+    } catch (err) {
+        res.status(500).json({ error: "Could not delete" });
+    }
+});
+
+module.exports = router;

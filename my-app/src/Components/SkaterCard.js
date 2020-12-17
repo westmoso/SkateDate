@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TinderCard from "react-tinder-card";
 import database from "../firebase"
+import './SkaterCard.css';
 
 function SkaterCard() {
     const [skater, setSkater] = useState([
@@ -33,7 +34,7 @@ function SkaterCard() {
     return (
         <div>
             <h1>Skater cards</h1>
-            <div className="SkaterCard__cardcontainer">
+            <div className="skaterCard__cardContainer">
                 {skater.map(skater => (
                     <TinderCard className="swipe"
                         key={skater.name}
