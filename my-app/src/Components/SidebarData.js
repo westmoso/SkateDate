@@ -24,7 +24,7 @@ export const SidebarData = [
     },
     {
         title: 'Resources',
-        path: '/Resourse',
+        path: '/Resources',
         icon: <FaIcons.FaCartPlus />,
         cName: 'nav-text'
     },
@@ -37,6 +37,18 @@ export const SidebarData = [
     {
         title: 'Account',
         path: '/support',
+        icon: <IoIcons.IoMdHelpCircle />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Sign Up',
+        path: '/SignUp',
+        icon: <IoIcons.IoMdHelpCircle />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Sign In',
+        path: '/SignIn',
         icon: <IoIcons.IoMdHelpCircle />,
         cName: 'nav-text'
     }

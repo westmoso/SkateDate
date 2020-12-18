@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,14 +9,17 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link as navigate } from "@reach/router";
 import Container from '@material-ui/core/Container';
+import useSkater from "../hooks/useSkater";
+import axios from "axios";
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+                Skate Date!
       </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -36,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%',
         marginTop: theme.spacing(3),
     },
     submit: {
@@ -46,6 +49,29 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
     const classes = useStyles();
+    const { setToken } = useSkater();
+
+    const usernameRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+
+    const signUp = async e => {
+        e.preventDefault();
+        const body = {
+            username: usernameRef.current.value,
+            email: emailRef.current.value,
+            password: passwordRef.current.value
+        };
+
+        const { data } = await axios.post("/api/auth/signup", body);
+
+        if (data) {
+            setToken(data.token);
+            navigate("/");
+        }
+    };
+
+
 
     return (
         <Container component="main" maxWidth="xs">
@@ -57,7 +83,7 @@ export default function SignUp() {
                 <Typography component="h1" variant="h5">
                     Sign up
         </Typography>
-                <form className={classes.form} noValidate>
+                <form noValidate onSubmit={signUp}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
