@@ -10,7 +10,28 @@ const locationSchema = new mongoose.Schema({
             address: "",
             hours: "" //what do I want the review info to contain? is it userfilled or is it rcvng data from elsewhere on the frontend
         }
+    },
+    review: {
+        type: String,
+        required: true,
+        siteInfo: {
+            location: "",
+            safetyGear: "",
+            distancing: "",
+            masks: "",
+            children: ""
+        }
+    },
+    reviewer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Skater",
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
+
 });
 
 const Location = mongoose.model("Location", locationSchema);

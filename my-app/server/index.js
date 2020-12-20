@@ -4,9 +4,11 @@ const config = require('config');
 const mongoose = require('mongoose');
 const path = require('path');
 
-
+//APP
 const app = express();
+const port = process.env.PORT || 5000;
 
+//DB
 try {
     mongoose
         .connect(config.get("mongoURI"), {
@@ -20,49 +22,23 @@ try {
 }
 
 //ROUTES
-const AuthRoute = require("./routes/auth"); //come back 
+const AuthRoute = require("./routes/auth");
 const SkaterRoute = require('./routes/skater');
 const ReviewRoute = require('./routes/review');
 const SpotRoute = require('./routes/spot');
+const CardsRoute = require("./routes/cards")
 
-
-
-
+//Middleware
 app.use(express.json());
-
 app.use(cors());
 
+
+//API
+app.use("/api/auth", AuthRoute)
 app.use("/api/skater", SkaterRoute)
 app.use("/api/review", ReviewRoute)
 app.use("/api/spot", SpotRoute)
-
-app.post("/skater/card", (req, res) => {
-    const skaterCard = req.body;
-
-    Cards.create(skaterCard, (err, data) => {
-        if (err) {
-            res.status(500).send(err)
-        }
-        else {
-            res.status(201).send(data)
-        }
-    })
-});
-
-app.get("/skater/card", (req, res) => {
-    const skaterCard = req.body;
-
-    Cards.find(skaterCard, (err, data) => {
-        if (err) {
-            res.status(500).send(err)
-        }
-        else {
-            res.status(201).send(data)
-        }
-    })
-});
-
-const port = process.env.PORT || 5000;
+app.use("/api/cards", CardsRoute)
 
 app.listen(port, () => {
     console.log(`Server started on port:${port}`)

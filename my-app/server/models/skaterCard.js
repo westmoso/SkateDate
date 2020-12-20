@@ -1,12 +1,19 @@
-import { boolean, string } from "joi";
-
 const mongoose = require("mongoose");
 
-const cardSchema = new mongoose.Schema({
-    firstName: string,
-    age: string,
-    skateStatus: boolean,
-    imgUrl: string
+const SkaterCardSchema = new mongoose.Schema({
+    age: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Skater"
+    },
+    url: {
+        type: String //for the avatar/profile image
+    },
+    name: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Skater"
+    }
 })
+const Cards = mongoose.model('cards', SkaterCardSchema);
 
-export default mongoose.model('cards', cardSchema)
+
+export default Cards

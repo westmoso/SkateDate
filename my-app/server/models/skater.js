@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 
 const skaterSchema = new mongoose.Schema({
-    firstname: {
+    name: {
         type: String
     },
     username: {
@@ -55,7 +55,7 @@ const skaterSchema = new mongoose.Schema({
         required: true,
         defaultValue: '',
     },
-    skatepreferences: {
+    preferences: {
         type: String,
         defaultValue: []
     },

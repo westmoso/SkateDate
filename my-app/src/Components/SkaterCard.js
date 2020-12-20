@@ -6,18 +6,19 @@ import './SkaterCard.css';
 function SkaterCard() {
     const [skater, setSkater] = useState([
         {
-            name: "george daniel",
-            url: "https://cdn.pixabay.com/photo/2016/09/17/07/03/instagram-1675670_960_720.png"
+            age: "33",
+            url: "https://images.freeimages.com/images/large-previews/611/bro-blading-1565212.jpg",
+            name: "angus"
+
         },
         {
-            name: "matty healy",
-            url: "https://cdn.pixabay.com/photo/2016/09/17/07/03/instagram-1675670_960_720.png"
+            age: "22",
+            url: "https://images.freeimages.com/images/large-previews/611/bro-blading-1565212.jpg",
+            name: "britney"
+
         },
-        {
-            name: "ross macdonald ",
-            url: "https://cdn.pixabay.com/photo/2016/09/17/07/03/instagram-1675670_960_720.png"
-        }
     ]);
+
 
     useEffect(() => {
         const unsubscribe = database
@@ -30,25 +31,33 @@ function SkaterCard() {
             unsubscribe();
         };
     }, [])
+    const swiped = (direction, nameToDelete) => {
+        console.log("receiving " + nameToDelete)
+    }
+
+
+    const outOfFrame = (name) => {
+        console.log(name + " was swiped off the screen!")
+    }
+
 
     return (
-        <div>
-            <h1>Skater cards</h1>
+        <div className="skaterCards">
             <div className="skaterCard__cardContainer">
                 {skater.map(skater => (
-                    <TinderCard className="swipe"
+                    <TinderCard
+                        className="swipe"
                         key={skater.name}
-                        preventSwipe={['up', 'down']}>
+                        preventSwipe={['up', 'down']}
+                        onSwipe={(dir) => swiped(dir, skater.name)}
+                        onCardLeftScreen={() => outOfFrame(skater.name)}>
                         <div style={{
                             backgroundImage: `url(${skater.url})`
                         }} className="card">
-                            <h3>
-                                {skater.name}
-                            </h3>
+                            <h3>{skater.name} {skater.age}</h3>
                         </div>
                     </TinderCard>
                 ))}
-
             </div>
         </div>
     )

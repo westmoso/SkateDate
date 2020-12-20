@@ -1,11 +1,11 @@
 import React from "react";
 import './App.css';
-import Sidebar from "./Components/Sidebar"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
 import SkaterCard from "./Components/SkaterCard";
-
+import Header from "./Components/Header"
+import SwipeButtons from "./Components/SwipeButtons"
 
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
     <>
       <div className="App">
         <Router>
-          <Sidebar />
+          <Header />
           <Switch>
             {/* <SignUp path="/SignUp" /> */}
             <SignIn path="/SignIn" />
@@ -22,6 +22,7 @@ export default function App() {
             </Route>
           </Switch>
         </Router>
+        <SwipeButtons />
       </div>
     </>
   );

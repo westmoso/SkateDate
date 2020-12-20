@@ -8,6 +8,10 @@ const uploadPath = path.join("uploads", "avatars");
 
 router.use(checkAuth);
 
+
+
+
+
 router.patch("/avatar", async (req, res) => {
     try {
         const file = req.files.file;
