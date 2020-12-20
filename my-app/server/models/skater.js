@@ -18,6 +18,9 @@ const skaterSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
+        unique: true,
+        allowNull: false,
+        isEmail: true,
         minlength: 5,
         maxlength: 255
     },
@@ -50,9 +53,11 @@ const skaterSchema = new mongoose.Schema({
         minlength: 5,
         maxlength: 5,
         required: true,
+        defaultValue: '',
     },
-    preferences: {
-        type: String
+    skatepreferences: {
+        type: String,
+        defaultValue: []
     },
     looking: {
         type: Boolean

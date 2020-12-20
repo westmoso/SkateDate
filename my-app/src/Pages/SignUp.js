@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as navigate } from "@reach/router";
 import Container from '@material-ui/core/Container';
-import useSkater from "../hooks/useSkater";
+// import useSkater from "../hooks/useSkater";
 import axios from "axios";
 
 function Copyright() {
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
     const classes = useStyles();
-    const { setToken } = useSkater();
+    // const { setToken } = useSkater();
 
     const usernameRef = useRef();
     const emailRef = useRef();
@@ -66,7 +66,7 @@ export default function SignUp() {
         const { data } = await axios.post("/api/auth/signup", body);
 
         if (data) {
-            setToken(data.token);
+            // setToken(data.token);
             navigate("/");
         }
     };
