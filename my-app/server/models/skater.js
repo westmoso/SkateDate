@@ -18,7 +18,6 @@ const skaterSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
-        unique: true,
         allowNull: false,
         isEmail: true,
         minlength: 5,
@@ -73,7 +72,10 @@ const skaterSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Review"
         }
-    ]
+    ],
+    isDeleted: {
+        type: String
+    }
 });
 
 skaterSchema.methods.generateAuthToken = function () {

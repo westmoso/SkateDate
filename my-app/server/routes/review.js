@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.use(checkAuth);
 
-router.post("/", async (req, res) => {
+router.post("/review", async (req, res) => {
     const { review } = req.body;
 
     const { error: er } = validateReview(review);

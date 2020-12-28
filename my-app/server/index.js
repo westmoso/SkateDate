@@ -25,7 +25,6 @@ try {
 const AuthRoute = require("./routes/auth");
 const SkaterRoute = require('./routes/skater');
 const ReviewRoute = require('./routes/review');
-const SpotRoute = require('./routes/spot');
 const CardsRoute = require("./routes/cards")
 
 //Middleware
@@ -35,10 +34,13 @@ app.use(cors());
 
 //API
 app.use("/api/auth", AuthRoute)
-app.use("/api/skater", SkaterRoute)
+app.use("/api/skaters", SkaterRoute)
 app.use("/api/review", ReviewRoute)
-app.use("/api/spot", SpotRoute)
 app.use("/api/cards", CardsRoute)
+
+app.get("/", (req, res) => {
+    res.send("i hate coding and love anthony")
+})
 
 app.listen(port, () => {
     console.log(`Server started on port:${port}`)
