@@ -44,6 +44,9 @@ const skaterSchema = new mongoose.Schema({
         set: age => age,
         alias: 'age',
     },
+    profile_image_url: {
+        type: String
+    },
     age: {
         type: Number
     },
@@ -61,6 +64,9 @@ const skaterSchema = new mongoose.Schema({
     looking: {
         type: Boolean
     },
+    liked: [
+        String
+    ],
     wishlist: [
         {
             type: mongoose.Schema.Types.ObjectId,
