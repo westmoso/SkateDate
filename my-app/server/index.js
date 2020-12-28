@@ -6,11 +6,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const multipart = require('connect-multiparty');
 const cloudinary = require('cloudinary');
-const loginRoute = require('./routes/loginRoute');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-
-require("dotenv").config();
 
 //APP
 const app = express();
@@ -41,6 +38,7 @@ const AuthRoute = require("./routes/auth");
 const SkaterRoute = require('./routes/skater');
 const ReviewRoute = require('./routes/review');
 const CardsRoute = require("./routes/cards")
+const LoginRoute = require("./routes/login")
 
 //Middleware
 app.use(express.json());
@@ -65,7 +63,7 @@ app.use("/api/review", ReviewRoute)
 app.use("/api/cards", CardsRoute)
 
 app.get("/", (req, res) => {
-    res.send("i hate coding and love anthony")
+    res.send("ugh")
 })
 
 app.listen(port, () => {
@@ -97,33 +95,33 @@ app.post('/upload', multipartMiddleware, (req, res) => {
     });
 });
 
-app.use('/api', loginRoute);
+app.use('/api', LoginRoute);
 //socket connections
 let connected = module.exports.connected = [];
 var found = false;
 io.on('connection', (socket) => {
-    console.log('user connected...');
+    console.log('skater connected...');
     socket.emit('connection');
     socket.on('login', (payload) => {
         console.log('data received on login ...', payload);
-        //connected user
+        //connected skater
         connected.push(payload);
         console.log('connected in login event on server', connected);
     });
-    socket.on('like', (userObject) => {
-        console.log('inside like socket event at the server and userObject is', userObject);
-        userOperations.likeUser(userObject, () => {
+    socket.on('like', (skaterObject) => {
+        console.log('inside like socket event at the server and skaterObject is', skaterObject);
+        skaterOperations.likeSkater(skaterObject, () => {
             //notif on like
             let socketid;
             console.log('connected array is', connected);
             for (let i = 0; i < connected.length; i++) {
-                console.log('connected email ' + connected[i].email + ' and userObject email ' + userObject.targetEmail);
-                if (connected[i].email == userObject.targetEmail) {
+                console.log('connected email ' + connected[i].email + ' and skaterObject email ' + skaterObject.targetEmail);
+                if (connected[i].email == skaterObject.targetEmail) {
                     console.log('inside if.. and socketid is', connected[i].socketid);
                     socket = connected[i].socketid;
                     console.log('running cb and socketid is', socketid);
                     io.to(connected[i].socketid).emit('sendLike', {
-                        message: 'you were liked by ' + userObject.email
+                        message: 'you were liked by ' + skaterObject.email
                     });
                 }
             }
