@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Joi = require('joi');
 const config = require("config");
 const jwt = require("jsonwebtoken");
-const path = require("path");
 
 const skaterSchema = new mongoose.Schema({
     name: {
@@ -105,7 +104,6 @@ function validateSkater(Skater) {
     });
     return schema.validate(Skater);
 }
-
 
 module.exports.validateSkater = validateSkater;
 module.exports.Skater = Skater;   

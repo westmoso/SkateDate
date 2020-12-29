@@ -126,7 +126,7 @@ export default class dashboard extends React.Component{
                         {this.state.url!==''? <img src={this.state.url}  style={{width: '20%', height: '20%', borderRadius: '50%'
                         }} className="image mx-auto" alt=""/>: <span></span>}
                        <br/><br/>
-                        <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
+                        <a href="#top" onClick={() => this.closeModal()}>Close</a>
                     </div>
                 </Modal>
             </section>
