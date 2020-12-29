@@ -44,9 +44,6 @@ export default class SkaterCard extends React.Component{
 <div className="card mb-2" style={{width: '20rem'}}>
   <img className="card-img-top" src={this.props.src} alt="Card"/>
   <div className="card-body">
-    <p className="card-text">{this.props.user.name}</p>
-    <p>Gender: {this.props.user.gender}</p>
-    <p>Email: {this.props.user.email}</p>
     <div className="row">
     <i className="fas fa-ban col-md-4" onClick={this.blockUser}></i>
     <i className="fas fa-thumbs-up col-md-4" onClick={this.likeUser}></i>

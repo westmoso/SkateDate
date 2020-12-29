@@ -2,10 +2,13 @@ const mongoose = require("mongoose");
 const Joi = require('joi');
 const config = require("config");
 const jwt = require("jsonwebtoken");
+const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
-const skaterSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        required: true
     },
     username: {
         type: String,
@@ -29,8 +32,16 @@ const skaterSchema = new mongoose.Schema({
         minlength: 5
     },
     avatar: {
-        type: String
+        type: String,
+        required: true
     },
+    places: [
+        {
+            type: mongoose.Types.ObjectId,
+            required: true,
+            ref: 'Place'
+        }
+    ],
     birthday: {
         type: String,
         get: a => {
@@ -42,9 +53,6 @@ const skaterSchema = new mongoose.Schema({
         },
         set: age => age,
         alias: 'age',
-    },
-    profile_image_url: {
-        type: String
     },
     age: {
         type: Number
@@ -66,24 +74,11 @@ const skaterSchema = new mongoose.Schema({
     liked: [
         String
     ],
-    wishlist: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Wishlist"
-        }
-    ],
-    reviews: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Review"
-        }
-    ],
-    isDeleted: {
-        type: String
-    }
 });
 
-skaterSchema.methods.generateAuthToken = function () {
+userSchema.plugin(uniqueValidator);
+
+userSchema.methods.generateAuthToken = function () {
     return jwt.sign(
         {
             _id: this._id,
@@ -94,16 +89,16 @@ skaterSchema.methods.generateAuthToken = function () {
     );
 };
 
-const Skater = mongoose.model("Skater", skaterSchema);
+const User = mongoose.model("User", userSchema);
 
-function validateSkater(Skater) {
+function validateUser(User) {
     const schema = Joi.object({
         username: Joi.string().min(5).max(50).required(),
         email: Joi.string().min(5).max(255).required().email(),
         password: Joi.string().min(5).max(1024).required()
     });
-    return schema.validate(Skater);
+    return schema.validate(User);
 }
 
-module.exports.validateSkater = validateSkater;
-module.exports.Skater = Skater;   
+module.exports.validateUser = validateUser;
+module.exports.User = User;   

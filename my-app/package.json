@@ -34,6 +34,7 @@
     "jsonwebtoken": "^8.5.1",
     "mapbox-gl": "^2.0.0",
     "modal": "^1.2.0",
+    "mongoose-unique-validator": "^2.0.3",
     "mysql2": "^2.2.5",
     "node-geocoder": "^3.27.0",
     "path": "^0.12.7",
