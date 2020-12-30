@@ -2,8 +2,8 @@ const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const HttpError = require('../model/errorModel');
-const User = require('../model/userModel');
+const HttpError = require('../models/errorModel');
+const User = require('../models/userModel');
 
 const getUsers = async (req, res, next) => {
   let users;
@@ -91,3 +91,62 @@ const signUp = async (req, res, next) => {
   });
 };
 
+const logIn = async (req, res, next) => {
+  const { email, password } = req.body;
+  let user;
+
+  try {
+    user = await User.findOne({ email: email });
+  } catch (err) {
+    return next(new HttpError('Login failed try again'), 422);
+  }
+
+  if (!user) {
+    return next(
+      new HttpError(
+        'Could not identify user. Credentials seem to be wrong.',
+        401
+      )
+    );
+  }
+
+  let isValidPassword = false;
+
+  try {
+    isValidPassword = await bcrypt.compare(password, user.password);
+  } catch (err) {
+    return next(
+      'Could not log you in, please check your credentials.',
+      500
+    );
+  }
+
+  if (!isValidPassword) {
+    return next(
+      'Could not log you in, please check your credentials.',
+      403
+    );
+  }
+
+  let token;
+
+  try {
+    token = jwt.sign(
+      { userId: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+  } catch (err) {
+    return next(
+      new HttpError('Logging in failed. Please correct.', 500)
+    );
+  }
+
+  res
+    .status(200)
+    .json({ userId: user.id, email: user.email, token: token });
+};
+
+exports.getUsers = getUsers;
+exports.signUp = signUp;
+exports.logIn = logIn;
